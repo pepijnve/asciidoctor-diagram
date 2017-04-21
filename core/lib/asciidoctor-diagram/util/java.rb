@@ -5,9 +5,7 @@ module Asciidoctor
     # @private
     module Java
       def self.classpath
-        @classpath ||= [
-            File.expand_path(File.join('../..', 'asciidoctor-diagram-java-1.3.11.jar'), File.dirname(__FILE__))
-        ]
+        @classpath ||= Dir["#{File.expand_path('../../..', __FILE__)}/*.jar"]
       end
 
       CRLF = "\r\n".encode(Encoding::US_ASCII)

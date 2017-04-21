@@ -10,9 +10,7 @@ module Asciidoctor
 
       private
 
-      JARS = ['plantuml-1.3.11.jar', 'plantuml.jar'].map do |jar|
-        File.expand_path File.join('../..', jar), File.dirname(__FILE__)
-      end
+      JARS = Dir["#{File.expand_path('../../..', __FILE__)}/*.jar"]
       Java.classpath.concat JARS
 
       def plantuml(parent_block, source, tag, mime_type)

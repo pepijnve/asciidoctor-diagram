@@ -1,5 +1,7 @@
 # coding: utf-8
-require_relative '../core/lib/asciidoctor-diagram/version'
+lib = File.expand_path('../../core/lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'asciidoctor-diagram/version'
 
 Gem::Specification.new do |s|
   s.name          = "asciidoctor-diagram-erd"

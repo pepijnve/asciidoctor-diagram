@@ -20,9 +20,7 @@ module Asciidoctor
           'transparent' => lambda { |o, v| o  << '--transparent' if v == 'true'}
       }
 
-      JARS = ['ditaa-1.3.11.jar', 'ditaamini-0.10.jar'].map do |jar|
-        File.expand_path File.join('../..', jar), File.dirname(__FILE__)
-      end
+      JARS = Dir["#{File.expand_path('../../..', __FILE__)}/*.jar"]
       Java.classpath.concat JARS
 
       def self.included(mod)

@@ -1,5 +1,7 @@
 # coding: utf-8
-require_relative '../core/lib/asciidoctor-diagram/version'
+lib = File.expand_path('../../core/lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'asciidoctor-diagram/version'
 
 Gem::Specification.new do |s|
   s.name          = "asciidoctor-diagram-blockdiag"
@@ -12,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage      = "https://github.com/asciidoctor/asciidoctor-diagram"
   s.license       = "MIT"
 
-  s.files         = Dir["#{File.expand_path('..',__FILE__)}/lib/**/*"]
+  s.files         = Dir["lib/**/*"]
 
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
