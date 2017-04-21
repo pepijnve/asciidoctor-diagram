@@ -5,10 +5,20 @@ test = RSpec::Core::RakeTask.new(:test)
 
 if ENV['APPVEYOR']
   # Exclude diagram types that require external libraries that are difficult to build on Windows.
-  test.exclude_pattern = 'spec/**/{blockdiag,shaape}_spec.rb'
+  test.exclude_pattern = '**/{blockdiag,shaape}_spec.rb'
 end
 
 task :default => :test
 
-spec = Gem::Specification.load('asciidoctor-diagram.gemspec')
-Gem::PackageTask.new(spec) { |task| }
+desc 'Build gem into the pkg directory'
+task :build do
+  FileUtils.rm_rf('pkg')
+  Dir['**/*.gemspec'].each do |gemspec|
+    cd(File.dirname(gemspec)) do
+      system "gem build #{File.basename(gemspec)}"
+    end
+  end
+  FileUtils.mkdir_p('pkg')
+  FileUtils.mv(Dir['**/*.gem'], 'pkg')
+end
+
